@@ -1,6 +1,6 @@
 ﻿
-
-using DTOs;
+using DTOs.Extensions;
+using FluentValidation;
 
 namespace CursoJonadaXamarinWebAPI.Routes;
 
@@ -11,20 +11,30 @@ public static class BooksRoutes
 
     internal static void AddBooksRoutes(IEndpointRouteBuilder routeBuilder)
     {
-        routeBuilder.MapPost(apiEndpoint, async (BooksRepository repository, NewBookDTO newBook) =>
+        routeBuilder.MapPost(apiEndpoint, async (BooksRepository repository, IValidator<NewBookDTO> validator, NewBookDTO newBook) =>
         {
-            Book book = new()
+            var validationResult = validator.Validate(newBook);
+
+            if (validationResult.IsValid)
             {
-                Author = newBook.Author,
-                Image = newBook.Image,
-                Title = newBook.Title,
-                Id = Guid.NewGuid().ToString(),
-                Editorial = newBook.Editorial
-            };
+                Book book = new()
+                {
+                    Author = newBook.Author,
+                    Image = newBook.Image,
+                    Title = newBook.Title,
+                    Id = Guid.NewGuid().ToString(),
+                    Editorial = newBook.Editorial
+                };
 
-            await repository.CreateAsync(book);
+                await repository.CreateAsync(book);
 
-            return Results.Ok();
+                return Results.Ok();
+            }
+            else
+            {
+                return Results.ValidationProblem(validationResult.ToDictonary());
+            }
+
         })
             .WithTags("Creators");
 
@@ -38,16 +48,34 @@ public static class BooksRoutes
         routeBuilder.MapGet(apiIdEndpoint, async (BooksRepository repository, string id)
             =>
         {
-            var item = await repository.GetById(id);
+            var item = await repository.GetByIdAsync(id);
             return Results.Ok(new BookDTO(item.Id, item.Title, item.Editorial, item.Author, item.Image));
         })
             .WithTags("Getters");
 
         routeBuilder.MapDelete(apiIdEndpoint, async (BooksRepository repository, string id) =>
         {
-            await repository.DeleteById(id);
+            await repository.DeleteByIdAsync(id);
             return Results.Ok();
         })
             .WithTags("Deletes");
+
+        routeBuilder.MapPut(apiEndpoint, async (BooksRepository repository, string id, NewBookDTO bookDTO) =>
+        {
+            var book = await repository.GetByIdAsync(id);
+            if (book is null)
+            {
+                return Results.NotFound();
+            }
+
+            book.Author = bookDTO.Author;
+            book.Image = bookDTO.Image;
+            book.Editorial = book.Editorial;
+            book.Title = bookDTO.Title;
+
+            await repository.UpdateAsync(book);
+
+            return Results.Ok();
+        });
     }
 }

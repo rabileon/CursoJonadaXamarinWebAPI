@@ -23,19 +23,25 @@ public abstract class GenericRepository<T, TContext> : IDisposable, IGenericRepo
         await _dbContext.SaveChangesAsync();
     }
 
-    public async ValueTask DeleteById(object id)
+    public async Task<IEnumerable<T>> GetAllAsync()
+     => await _set.ToListAsync();
+
+    public async Task<T> GetByIdAsync(object id)
+     => await _set.FindAsync(id)!;
+
+    public async ValueTask DeleteByIdAsync(object id)
     {
-        var value = await GetById(id);
+        var value = await GetByIdAsync(id);
         if (value is not null)
             _set.Remove(value);
         await _dbContext.SaveChangesAsync();
     }
 
-    public async Task<IEnumerable<T>> GetAllAsync()
-     => await _set.ToListAsync();
-
-    public async Task<T> GetById(object id)
-     => await _set.FindAsync(id)!;
+    public async Task UpdateAsync(T Value)
+    {
+        _set.Update(Value);
+        await _dbContext.SaveChangesAsync();
+    }
 
     public void Dispose() => _dbContext.Dispose();
 }

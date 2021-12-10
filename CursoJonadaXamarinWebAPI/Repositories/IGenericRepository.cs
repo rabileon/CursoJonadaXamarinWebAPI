@@ -6,7 +6,8 @@ public interface IGenericRepository<T> where T : class
 
     Task CreateAsync(T value);
 
-    Task<T> GetById(object id);
+    Task<T> GetByIdAsync(object id);
 
-    ValueTask DeleteById(object id);
+    ValueTask DeleteByIdAsync(object id);
+    Task UpdateAsync(T value);
 }
