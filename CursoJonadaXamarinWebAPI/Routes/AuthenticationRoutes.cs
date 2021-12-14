@@ -1,4 +1,5 @@
 ﻿using CursoJonadaXamarinWebAPI.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -13,28 +14,28 @@ namespace CursoJonadaXamarinWebAPI.Routes
 
         internal static void AddRoutes(IEndpointRouteBuilder routeBuilder)
         {
-            routeBuilder.MapPost($"{apiEndPoint}/users", async (UserManager<ApplicationUser> userManager, UserDTO userDTO) =>
-            {
-                ApplicationUser applicationUser = new()
-                {
-                    Address = userDTO.Address,
-                    Email = userDTO.Email,
-                    UserName = userDTO.UserName
-                };
+            routeBuilder.MapPost($"{apiEndPoint}/users", [Authorize("IsAdmin")] async (UserManager<ApplicationUser> userManager, UserDTO userDTO) =>
+             {
+                 ApplicationUser applicationUser = new()
+                 {
+                     Address = userDTO.Address,
+                     Email = userDTO.Email,
+                     UserName = userDTO.UserName
+                 };
 
-                var result = await userManager.CreateAsync(applicationUser, userDTO.Password);
+                 var result = await userManager.CreateAsync(applicationUser, userDTO.Password);
 
-                if (result.Succeeded)
-                {
-                    var claim = new Claim("IsAdmin", "true");
-                    await userManager.AddClaimAsync(applicationUser, claim);
-                    return Results.Ok();
-                }
-                else
-                {
-                    return Results.BadRequest(result.Errors);
-                }
-            });
+                 if (result.Succeeded)
+                 {
+                     var claim = new Claim("IsAdmin", "true");
+                     await userManager.AddClaimAsync(applicationUser, claim);
+                     return Results.Ok();
+                 }
+                 else
+                 {
+                     return Results.BadRequest(result.Errors);
+                 }
+             });
 
             routeBuilder.MapPost($"{apiEndPoint}/login", async (IConfiguration configuration, UserManager<ApplicationUser> userManager, LoginDTO loginDTO) =>
             {

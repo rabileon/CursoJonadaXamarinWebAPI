@@ -1,6 +1,7 @@
 ﻿
 using DTOs.Extensions;
 using FluentValidation;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CursoJonadaXamarinWebAPI.Routes;
 
@@ -11,7 +12,7 @@ public static class BooksRoutes
 
     internal static void AddBooksRoutes(IEndpointRouteBuilder routeBuilder)
     {
-        routeBuilder.MapPost(apiEndpoint, async (BooksRepository repository, IValidator<NewBookDTO> validator, NewBookDTO newBook) =>
+        routeBuilder.MapPost(apiEndpoint, [Authorize] async (BooksRepository repository, IValidator<NewBookDTO> validator, NewBookDTO newBook) =>
         {
             var validationResult = validator.Validate(newBook);
 
@@ -38,14 +39,14 @@ public static class BooksRoutes
         })
             .WithTags("Creators");
 
-        routeBuilder.MapGet(apiEndpoint, async (BooksRepository repository)
+        routeBuilder.MapGet(apiEndpoint, [Authorize] async (BooksRepository repository)
             => Results.Ok(
                 (await repository.GetAllAsync())
                 .Select(b => new BookDTO(b.Id, b.Title, b.Editorial, b.Author, b.Image))
                 ))
             .WithTags("Getters");
 
-        routeBuilder.MapGet(apiIdEndpoint, async (BooksRepository repository, string id)
+        routeBuilder.MapGet(apiIdEndpoint, [Authorize] async (BooksRepository repository, string id)
             =>
         {
             var item = await repository.GetByIdAsync(id);
@@ -60,7 +61,7 @@ public static class BooksRoutes
         })
             .WithTags("Deletes");
 
-        routeBuilder.MapPut(apiEndpoint, async (BooksRepository repository, string id, NewBookDTO bookDTO) =>
+        routeBuilder.MapPut(apiEndpoint, [Authorize] async (BooksRepository repository, string id, NewBookDTO bookDTO) =>
         {
             var book = await repository.GetByIdAsync(id);
             if (book is null)
