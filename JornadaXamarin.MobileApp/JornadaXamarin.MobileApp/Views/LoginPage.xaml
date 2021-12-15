@@ -1,10 +1,43 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="JornadaXamarin.MobileApp.Views.LoginPage">
-    <ContentPage.Content>
-        <Grid>
+<controls:BindedPage
+    x:Class="JornadaXamarin.MobileApp.Views.LoginPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:JornadaXamarin.MobileApp.AppBase.Controls"
+    xmlns:vm="clr-namespace:JornadaXamarin.MobileApp.ViewModels">
 
+    <ContentPage.BindingContext>
+        <vm:LoginViewModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <Grid ColumnDefinitions="5*,90*,5*" RowDefinitions="75,auto,auto,auto,auto,auto,auto,*">
+            <Label
+                Grid.Column="1"
+                Style="{StaticResource Header}"
+                Text="{StaticResource AppTitle}" />
+            <Entry
+                Grid.Row=" 1"
+                Grid.Column="1"
+                Keyboard="Email"
+                Placeholder="User"
+                Text="{Binding Name}" />
+            <Entry
+                Grid.Row="2"
+                Grid.Column="1"
+                IsPassword="True"
+                Placeholder="¨Password"
+                Text="{Binding Password}" />
+            <ActivityIndicator
+                Grid.Row="3"
+                Grid.Column="1"
+                IsRunning="{Binding IsBusy}"
+                IsVisible="{Binding IsBusy}" />
+            <Button
+                Grid.Row="4"
+                Grid.Column="1"
+                Command="{Binding LoginCommand}"
+                Text="Login" />
         </Grid>
     </ContentPage.Content>
-</ContentPage>
+</controls:BindedPage>

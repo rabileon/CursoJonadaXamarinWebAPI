@@ -11,9 +11,9 @@ using Xamarin.Forms.Xaml;
 namespace JornadaXamarin.MobileApp.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class LoginPage : BindedPage
+    public partial class MainMenuPage : BindedPage
     {
-        public LoginPage()
+        public MainMenuPage()
         {
             InitializeComponent();
         }

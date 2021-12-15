@@ -1,8 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<Application xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="JornadaXamarin.MobileApp.App">
+<Application
+    x:Class="JornadaXamarin.MobileApp.App"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
     <Application.Resources>
+        <x:String x:Key="AppTitle">Books App</x:String>
 
+        <Color x:Key="MainColor">Black</Color>
+
+        <Style x:Key="Header" TargetType="Label">
+            <Setter Property="FontSize" Value="Large" />
+            <Setter Property="HorizontalOptions" Value="Center" />
+            <Setter Property="VerticalOptions" Value="Center" />
+            <Setter Property="TextColor" Value="{StaticResource MainColor}" />
+        </Style>
+
+        <Style TargetType="Button">
+            <Setter Property="BackgroundColor" Value="{StaticResource MainColor}" />
+            <Setter Property="TextColor" Value="White" />
+        </Style>
     </Application.Resources>
 </Application>
