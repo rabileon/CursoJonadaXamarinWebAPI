@@ -1,4 +1,8 @@
 ﻿using JornadaXamarin.MobileApp.AppBase.Objects;
+using JornadaXamarin.MobileApp.Models;
+using JornadaXamarin.MobileApp.Services.Authentication;
+using JornadaXamarin.MobileApp.Services.Interfaces;
+using JornadaXamarin.MobileApp.Settings;
 using JornadaXamarin.MobileApp.Views;
 using System;
 using System.Collections.Generic;
@@ -15,8 +19,8 @@ namespace JornadaXamarin.MobileApp.ViewModels
             Title = "Login";
 
 #if DEBUG
-            Name = "RabiAdmin";
-            Password = "Rabi123456";
+            Name = "rabileonC";
+            Password = "rabiLeon12345678.-";
 #endif
             LoginCommand = new(async () => await LoginAsync());
         }
@@ -27,12 +31,36 @@ namespace JornadaXamarin.MobileApp.ViewModels
             if (!IsBusy)
             {
                 IsBusy = true;
-                await Task.Delay(2000);
-                App.Current.MainPage = new NavigationPage(new MainMenuPage());
+                Error = string.Empty;
+
+                LoginDTO loginDTO = new()
+                {
+                    Password = Password,
+                    UserName = Name
+                };
+                IAuthenticationService authenticationService = new AuthenticationService();
+                (bool success, string token) = await authenticationService.Login(loginDTO);
+
+                if (success)
+                {
+                    UserSettings.Token = token.Replace("\"", "");
+                    App.Current.MainPage = new NavigationPage(new MainMenuPage());
+                }
+                else
+                {
+                    Error = "No fue posible iniciar sesión";
+                }
 
                 IsBusy = false;
-                IsBusy = false;
             }
+        }
+
+        private string error;
+
+        public string Error
+        {
+            get => error;
+            set => SetProperty(ref error, value);
         }
 
         private string name;

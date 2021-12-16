@@ -11,7 +11,7 @@ namespace JornadaXamarin.MobileApp
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new LoginPage());
+            MainPage = new SplashScreen();
         }
 
         protected override void OnStart()

@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<controls:BindedPage
+    x:Class="JornadaXamarin.MobileApp.Views.MyBooksPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:JornadaXamarin.MobileApp.AppBase.Controls"
+    xmlns:vm="clr-namespace:JornadaXamarin.MobileApp.ViewModels">
+    <controls:BindedPage.BindingContext>
+        <vm:MyBooksViewModel />
+    </controls:BindedPage.BindingContext>
+
+    <CollectionView ItemsSource="{Binding Books}">
+        <CollectionView.ItemTemplate>
+            <DataTemplate>
+                <Grid ColumnDefinitions="2*,8*">
+                    <Image
+                        Grid.Row="0"
+                        Grid.RowSpan="2"
+                        Source="{Binding Image}" />
+                    <Label
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        Text="{Binding Title}"
+                        TextColor="{StaticResource MainColor}" />
+                    <Label
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Text="{Binding Author}" />
+                </Grid>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
+</controls:BindedPage>

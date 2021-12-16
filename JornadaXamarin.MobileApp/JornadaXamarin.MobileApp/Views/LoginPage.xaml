@@ -33,8 +33,12 @@
                 Grid.Column="1"
                 IsRunning="{Binding IsBusy}"
                 IsVisible="{Binding IsBusy}" />
-            <Button
+            <Label
                 Grid.Row="4"
+                Grid.Column="1"
+                Text="{Binding Error}" />
+            <Button
+                Grid.Row="5"
                 Grid.Column="1"
                 Command="{Binding LoginCommand}"
                 Text="Login" />

@@ -15,7 +15,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JornadaXamarin.MobileApp.An
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JornadaXamarin.MobileApp.iOS", "JornadaXamarin.MobileApp\JornadaXamarin.MobileApp.iOS\JornadaXamarin.MobileApp.iOS.csproj", "{E2B4E1EB-6F4A-4844-8DB2-6BFFEB34057E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JornadaXamarin.MobileApp", "JornadaXamarin.MobileApp\JornadaXamarin.MobileApp\JornadaXamarin.MobileApp.csproj", "{40E43A69-F3A7-4B23-A2B2-B060DD4CE1CA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JornadaXamarin.MobileApp", "JornadaXamarin.MobileApp\JornadaXamarin.MobileApp\JornadaXamarin.MobileApp.csproj", "{40E43A69-F3A7-4B23-A2B2-B060DD4CE1CA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

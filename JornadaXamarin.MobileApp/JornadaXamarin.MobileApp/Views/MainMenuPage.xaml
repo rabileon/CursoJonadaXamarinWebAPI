@@ -8,4 +8,15 @@
     <controls:BindedPage.BindingContext>
         <vm:MainMenuViewModel />
     </controls:BindedPage.BindingContext>
+    <Grid
+        Padding="20"
+        ColumnDefinitions="*"
+        RowDefinitions="*">
+        <Button
+            BackgroundColor="{StaticResource MainColor}"
+            Command="{Binding MyBooksCommand}"
+            Text="My Books"
+            VerticalOptions="CenterAndExpand" />
+    </Grid>
+
 </controls:BindedPage>
