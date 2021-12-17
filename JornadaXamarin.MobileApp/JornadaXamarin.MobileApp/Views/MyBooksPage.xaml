@@ -9,25 +9,33 @@
         <vm:MyBooksViewModel />
     </controls:BindedPage.BindingContext>
 
-    <CollectionView ItemsSource="{Binding Books}">
-        <CollectionView.ItemTemplate>
-            <DataTemplate>
-                <Grid ColumnDefinitions="2*,8*">
-                    <Image
-                        Grid.Row="0"
-                        Grid.RowSpan="2"
-                        Source="{Binding Image}" />
-                    <Label
-                        Grid.Row="0"
-                        Grid.Column="1"
-                        Text="{Binding Title}"
-                        TextColor="{StaticResource MainColor}" />
-                    <Label
-                        Grid.Row="1"
-                        Grid.Column="1"
-                        Text="{Binding Author}" />
-                </Grid>
-            </DataTemplate>
-        </CollectionView.ItemTemplate>
-    </CollectionView>
+    <controls:BindedPage.ToolbarItems>
+        <ToolbarItem Command="{Binding AddCommand}" Text="Add" />
+    </controls:BindedPage.ToolbarItems>
+
+    <RefreshView Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}">
+        <CollectionView ItemsSource="{Binding Books}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Margin="0,10" ColumnDefinitions="2*,8*">
+                        <Image
+                            Grid.Row="0"
+                            Grid.RowSpan="2"
+                            Margin="0,5"
+                            Source="{Binding Image}" />
+                        <Label
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            Text="{Binding Title}"
+                            TextColor="{StaticResource MainColor}" />
+                        <Label
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            Text="{Binding Author}" />
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </RefreshView>
+
 </controls:BindedPage>

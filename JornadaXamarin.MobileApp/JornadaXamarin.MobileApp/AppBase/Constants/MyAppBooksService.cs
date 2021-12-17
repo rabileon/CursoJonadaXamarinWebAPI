@@ -6,7 +6,7 @@ namespace JornadaXamarin.MobileApp.AppBase.Constants
 {
     public static class MyAppBooksService
     {
-        public const string API_ENDPOINT = "https://3b56-189-214-0-111.ngrok.io/api/";
+        public const string API_ENDPOINT = "https://0965-189-214-0-111.ngrok.io/api/";
 
         public const string LOGIN = "authentication/login";
 
