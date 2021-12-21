@@ -35,12 +35,15 @@ namespace JornadaXamarin.MobileApp.ViewModels
 
         public Command RefreshCommand { get; set; }
         public Command AddCommand { get; set; }
+
+
         public MyBooksViewModel()
         {
             Title = "My Books";
 
             RefreshCommand = new(async () => await LoadBooks(true));
             AddCommand = new(async () => await App.Current.MainPage.Navigation.PushAsync(new NewBookPage()));
+
         }
 
         public async override Task OnAppearing()
@@ -56,7 +59,7 @@ namespace JornadaXamarin.MobileApp.ViewModels
                 IsRefreshing = true;
                 var books = await SQLiteAsyncManager.Instance.GetAllAsync<BookDTO>();
 
-                if (!books.Any())
+                if (!books.Any() || fromService)
                 {
                     if (Xamarin.Essentials.Connectivity.NetworkAccess == Xamarin.Essentials.NetworkAccess.Internet)
                     {

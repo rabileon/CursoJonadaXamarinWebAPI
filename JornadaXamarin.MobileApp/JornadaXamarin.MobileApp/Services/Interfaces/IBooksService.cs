@@ -9,5 +9,7 @@ namespace JornadaXamarin.MobileApp.Services.Interfaces
     public interface IBooksService
     {
         Task<IEnumerable<BookDTO>> GetBooks();
+
+        Task<bool> PostBook(NewBookDTO bookDTO);
     }
 }

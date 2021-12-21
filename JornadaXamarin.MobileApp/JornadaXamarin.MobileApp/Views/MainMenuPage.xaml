@@ -11,11 +11,19 @@
     <Grid
         Padding="20"
         ColumnDefinitions="*"
-        RowDefinitions="*">
+        RowDefinitions="*,*">
         <Button
+            Grid.Row="0"
             BackgroundColor="{StaticResource MainColor}"
             Command="{Binding MyBooksCommand}"
             Text="My Books"
+            VerticalOptions="CenterAndExpand" />
+
+        <Button
+            Grid.Row="1"
+            BackgroundColor="{StaticResource MainColor}"
+            Command="{Binding BranchesCommand}"
+            Text="Branches"
             VerticalOptions="CenterAndExpand" />
     </Grid>
 

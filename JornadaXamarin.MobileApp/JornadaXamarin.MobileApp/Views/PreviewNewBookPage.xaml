@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<controls:BindedPage
+    x:Class="JornadaXamarin.MobileApp.Views.PreviewNewBookPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:JornadaXamarin.MobileApp.AppBase.Controls"
+    xmlns:cvt="clr-namespace:JornadaXamarin.MobileApp.Converters">
+
+    <controls:BindedPage.ToolbarItems>
+        <ToolbarItem Command="{Binding SendBookCommand}" Text="Finish" />
+    </controls:BindedPage.ToolbarItems>
+    <controls:BindedPage.Resources>
+        <cvt:PathToImageSourceConverter x:Key="PathCvt" />
+    </controls:BindedPage.Resources>
+    <StackLayout Margin="20">
+        <Frame
+            BackgroundColor="Brown"
+            HeightRequest="130"
+            HorizontalOptions="Center"
+            WidthRequest="150">
+            <Image Source="{Binding PhotoPath, Converter={StaticResource PathCvt}}" />
+        </Frame>
+        <Label Text="Título" />
+        <Label Text="{Binding BookTitle}" />
+        <Label Text="Autor" />
+        <Label Text="{Binding BookAuthor}" />
+        <Label Text="Editoral" />
+        <Label Text="{Binding BookEditorial}" />
+    </StackLayout>
+</controls:BindedPage>

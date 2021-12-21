@@ -21,7 +21,7 @@ namespace JornadaXamarin.MobileApp.Converters
             }
             else
             {
-                return null;
+                return ImageSource.FromFile("camera");
             }
         }
 

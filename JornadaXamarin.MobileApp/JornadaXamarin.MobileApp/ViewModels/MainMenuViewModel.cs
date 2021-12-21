@@ -13,21 +13,26 @@ namespace JornadaXamarin.MobileApp.ViewModels
     {
         enum Pages
         {
-            MyBooks
+            MyBooks,
+            Branches
         };
         public Command MyBooksCommand { get; set; }
+        public Command BranchesCommand { get; set; }
         public MainMenuViewModel()
         {
             Title = "Main Menu";
             MyBooksCommand = new(async () => await NavigateTo(Pages.MyBooks));
+            BranchesCommand = new(async () => await NavigateTo(Pages.Branches));
         }
 
         private async Task NavigateTo(Pages myBooks)
         {
-            BindedPage target = myBooks switch
+            ContentPage target = myBooks switch
             {
                 Pages.MyBooks => new MyBooksPage(),
+                Pages.Branches => new BranchDetailPage(),
                 _ => throw new Exception("Target is not valid")
+
             };
             await App.Current.MainPage.Navigation.PushAsync(target);
         }

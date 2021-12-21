@@ -25,5 +25,13 @@ namespace JornadaXamarin.MobileApp.Services.Books
 
             return books;
         }
+
+        public async Task<bool> PostBook(NewBookDTO bookDTO)
+        {
+            Init();
+            var response = await httpClient.PostAsJsonAsync(AppBase.Constants.MyAppBooksService.BOOKS, bookDTO);
+
+            return response.IsSuccessStatusCode;
+        }
     }
 }
