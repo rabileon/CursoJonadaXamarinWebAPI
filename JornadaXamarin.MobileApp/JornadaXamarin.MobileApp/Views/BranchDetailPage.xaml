@@ -1,12 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage
+<controls:BindedPage
     x:Class="JornadaXamarin.MobileApp.Views.BranchDetailPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:map="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps">
-    <ContentPage.Content>
-        <StackLayout>
-            <map:Map IsShowingUser="True" />
-        </StackLayout>
-    </ContentPage.Content>
-</ContentPage>
+    xmlns:controls="clr-namespace:JornadaXamarin.MobileApp.AppBase.Controls"
+    xmlns:map="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
+    xmlns:vm="clr-namespace:JornadaXamarin.MobileApp.ViewModels">
+    <controls:BindedPage.BindingContext>
+        <vm:BranchDetailViewModel />
+    </controls:BindedPage.BindingContext>
+
+
+    <StackLayout>
+        <controls:BranchMap BranchLocation="{Binding BranchLocation}" UserLocation="{Binding UserLocation}" />
+    </StackLayout>
+
+</controls:BindedPage>

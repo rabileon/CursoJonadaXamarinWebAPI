@@ -48,6 +48,7 @@ builder.Services.AddDbContext<AuthContext>(options => options.UseSqlServer(build
 //builder.Services.AddSqlServer<AuthContext>
 //    (builder.Configuration.GetConnectionString("AuthConnectionString"));
 builder.Services.AddScoped<BooksRepository>();
+builder.Services.AddScoped<BranchesRepository>();
 builder.Services.AddValidators();
 
 builder.Services.AddIdentityCore<ApplicationUser>(options =>
@@ -93,6 +94,7 @@ app.UseHttpsRedirection();
 
 AuthenticationRoutes.AddRoutes(app);
 BooksRoutes.AddBooksRoutes(app);
+BranchesRoutes.AddRoutes(app);
 
 app.Run();
 

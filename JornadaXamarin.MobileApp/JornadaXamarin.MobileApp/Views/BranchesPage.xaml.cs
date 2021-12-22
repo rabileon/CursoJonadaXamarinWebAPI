@@ -11,9 +11,9 @@ using Xamarin.Forms.Xaml;
 namespace JornadaXamarin.MobileApp.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class BranchDetailPage : BindedPage
+    public partial class BranchesPage : BindedPage
     {
-        public BranchDetailPage()
+        public BranchesPage()
         {
             InitializeComponent();
         }

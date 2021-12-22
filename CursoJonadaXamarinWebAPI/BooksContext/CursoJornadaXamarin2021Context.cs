@@ -18,6 +18,8 @@ namespace CursoJonadaXamarinWebAPI.BooksContext
 
         public virtual DbSet<Book> Books { get; set; } = null!;
 
+        public virtual DbSet<Branch> Branches { get; set; } = null!;
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -29,29 +31,39 @@ namespace CursoJonadaXamarinWebAPI.BooksContext
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Book>(entity =>
+            modelBuilder.Entity<Branch>(entity =>
             {
-                entity.Property(e => e.Id)
-                    .HasMaxLength(60)
-                    .IsUnicode(false)
-                    .HasColumnName("ID");
-
-                entity.Property(e => e.Author)
-                    .HasMaxLength(60)
+                entity.Property(e => e.Location)
+                    .HasMaxLength(100)
                     .IsUnicode(false);
-
-                entity.Property(e => e.Editorial)
-                    .HasMaxLength(60)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Image)
-                    .HasMaxLength(200)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Title)
-                    .HasMaxLength(60)
+                entity.Property(e => e.Name)
+                    .HasMaxLength(100)
                     .IsUnicode(false);
             });
+
+            modelBuilder.Entity<Book>(entity =>
+                {
+                    entity.Property(e => e.Id)
+                        .HasMaxLength(60)
+                        .IsUnicode(false)
+                        .HasColumnName("ID");
+
+                    entity.Property(e => e.Author)
+                        .HasMaxLength(60)
+                        .IsUnicode(false);
+
+                    entity.Property(e => e.Editorial)
+                        .HasMaxLength(60)
+                        .IsUnicode(false);
+
+                    entity.Property(e => e.Image)
+                        .HasMaxLength(200)
+                        .IsUnicode(false);
+
+                    entity.Property(e => e.Title)
+                        .HasMaxLength(60)
+                        .IsUnicode(false);
+                });
 
             OnModelCreatingPartial(modelBuilder);
         }

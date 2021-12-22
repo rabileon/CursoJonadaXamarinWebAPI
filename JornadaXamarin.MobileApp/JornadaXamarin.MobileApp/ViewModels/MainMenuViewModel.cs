@@ -30,7 +30,7 @@ namespace JornadaXamarin.MobileApp.ViewModels
             ContentPage target = myBooks switch
             {
                 Pages.MyBooks => new MyBooksPage(),
-                Pages.Branches => new BranchDetailPage(),
+                Pages.Branches => new BranchesPage(),
                 _ => throw new Exception("Target is not valid")
 
             };
